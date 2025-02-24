@@ -1,0 +1,45 @@
+//1.—Primary key and Foreign Key usage
+
+CREATE TABLE TEAMS(
+id serial PRIMARY KEY,
+name varchar(50)
+);
+
+CREATE TABLE PLAYERS(
+id serial PRIMARY KEY,
+fullname varchar(50) NOT NULL,
+team_id int,
+FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE);
+
+//—Demonstration of FK
+
+INSERT INTO teams (name) VALUES ('Manchester United'), ('Tottenham'), ('Liverpool');
+INSERT INTO players (fullname, team_id) VALUES ('Amad Diallo', 1), ('James Maddison', 2), ('Mohammed Salah', 3);
+DELETE FROM teams where id=3; //It will delete Liverpool and because of fk it will delete Mohammed Salah from players table.
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//2.—Alter command
+
+CREATE TABLE position(
+id serial PRIMARY KEY,
+name varchar(50));
+
+
+insert into position(name) values ('Goalkeeper'),('Defender'),('Midfielder'),('Attacker');
+
+ALTER TABLE players ADD column positionId int;
+ALTER TABLE players ADD CONSTRAINT fk_players_position
+FOREIGN KEY (positionID)
+REFERENCES position(id)
+ON DELETE CASCADE; 
+(if position deleted , it will also delete all players in that position)
+
+
+insert into players (fullname, team_id, positionid) values ('Erling Haaland',5,4);
+insert into players (fullname, team_id, positionid) values ('Alexander Arnold',4,2);
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+//
+
