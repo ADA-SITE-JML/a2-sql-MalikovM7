@@ -18,7 +18,7 @@ INSERT INTO players (fullname, team_id) VALUES ('Amad Diallo', 1), ('James Maddi
 DELETE FROM teams where id=3; //It will delete Liverpool and because of fk it will delete Mohammed Salah from players table.
 
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //2.—Alter command
 
 CREATE TABLE position(
@@ -39,7 +39,25 @@ ON DELETE CASCADE;
 insert into players (fullname, team_id, positionid) values ('Erling Haaland',5,4);
 insert into players (fullname, team_id, positionid) values ('Alexander Arnold',4,2);
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-//
+// 3.Check, NOT NULL, UNIQUE
+
+create table fragrances(
+id serial,
+name varchar(50) NOT NULL UNIQUE,
+price DECIMAL(10,2) CHECK(price>0),
+discounted_price DECIMAL(10,2),
+CHECK (discounted_price > 0),
+CONSTRAINT valid_discount CHECK (price > discounted_price),
+PRIMARY KEY(id));
+
+
+To check the constraints we can insert something into the table.
+
+insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',100,30);
+
+insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',100,120);
+insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',-10,0);
+
 
