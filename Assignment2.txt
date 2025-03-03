@@ -118,3 +118,34 @@ full outer join enrollments e on s.student_id=e.student_id;
 select student_id , student_name, course
 from students
 natural join enrollments;
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+-- 5.VIEWS AND MATERIALIZED VIEWS DIFFERENCE
+
+ALTER table students add column major varchar(50);
+
+insert into students(student_name,major) values ('Malik','BSE'),('Orxan','CE'),('Nixat','CS'),('Rasul','IT');
+
+create view major_of_students as 
+select major from students;
+
+insert into students (student_name, major) values ('Ayxan','SL');
+
+select * from major_of_students;
+
+-- MATERIALIZED VIEW EXAMPLE
+
+ALTER TABLE students ADD COLUMN gpa DECIMAL(3,2);
+UPDATE students 
+SET gpa = ROUND((RANDOM() * 4)::NUMERIC, 2);
+SELECT * FROM students;
+
+create materialized view average_gpa as 
+select avg(gpa) as avg_gpa from students;
+
+update students set gpa=2.15 where student_name='Orxan';
+
+REFRESH MATERIALIZED VIEW average_gpa;
+
