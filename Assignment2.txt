@@ -19,7 +19,7 @@ DELETE FROM teams where id=3;
 -- It will delete Liverpool and because of fk it will delete Mohammed Salah from players table.
 
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 -- 2.Alter command
 
 CREATE TABLE position(
@@ -40,7 +40,7 @@ ON DELETE CASCADE;
 insert into players (fullname, team_id, positionid) values ('Erling Haaland',5,4);
 insert into players (fullname, team_id, positionid) values ('Alexander Arnold',4,2);
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 -- 3.Check, NOT NULL, UNIQUE
 
@@ -62,7 +62,7 @@ insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier'
 insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',-10,0);
 
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 -- 4.Demonstrating of Joins
 
@@ -121,7 +121,7 @@ from students
 natural join enrollments;
 
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 -- 5.VIEWS AND MATERIALIZED VIEWS DIFFERENCE
 
 ALTER table students add column major varchar(50);
@@ -165,7 +165,7 @@ update students set gpa=2.15 where student_name='Orxan';
 REFRESH MATERIALIZED VIEW average_gpa;
 
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 -- 6.Create as select and insert as select;
 
 -- First create unnormalized table and insert some values there
@@ -186,6 +186,17 @@ insert into fragrance_store (CustomerFullname, PhoneNumber, ProductID, ProductNa
 ('Michael Jonathan',443332211,12,'Dior Sauvage','320');
 
 
+-- Or insert as select
+
+create table customers (
+CustomerId SERIAL PRIMARY KEY,
+CustomerFullname varchar(50),
+PhoneNumber int);
+
+insert into customers (CustomerFullname,PhoneNumber)
+select CustomerFullname,PhoneNumber from fragrance_store;
+
+
 -- Create tables as select
 
 CREATE TABLE Orders AS 
@@ -201,19 +212,9 @@ ON o.PhoneNumber = c.PhoneNumber;
 
 ALTER TABLE Orders ADD PRIMARY KEY (OrderID);
 
--- Or insert as select
-
-create table customers (
-CustomerId SERIAL PRIMARY KEY,
-CustomerFullname varchar(50),
-PhoneNumber int);
-
-insert into customers (CustomerFullname,PhoneNumber)
-select CustomerFullname,PhoneNumber from fragrance_store;
-
 ALTER TABLE Orders ADD FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID);
 
-—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 -- 7.Commit and RollBack demonstration
 
