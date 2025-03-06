@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS TEAMS;
 DROP TABLE IF EXISTS PLAYERS;
 DROP TABLE IF EXISTS position;
 DROP TABLE IF EXISTS fragrances;
-DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS enrollments;
+DROP TABLE IF EXISTS students;
 DROP VIEW IF EXISTS major_of_students;
 DROP MATERIALIZED VIEW IF EXISTS average_gpa;
 DROP TABLE IF EXISTS fragrance_store;
@@ -102,7 +102,7 @@ insert into enrollments (student_id, course) values (1,'Physics'),(3,'Biology'),
 
 select s.student_id, s.student_name, e.course
 from students s
-inner join enrollments e on s.setudent_id=e.student_id;
+inner join enrollments e on s.student_id=e.student_id;
 
 -- LEFT outer JOIN
 
