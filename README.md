@@ -8,6 +8,10 @@ Mar1: Created two tables (students and their enrollments) to demonstrate 3 types
 Mar3: Used student table and added the columns to create a view and materialized view, and their difference in terms of update or insert.
 Mar4: First, I have built the unnormalized table Fragrance store, then by using insert as select and create as select split it into two tables. Moreover, I completed the last task which was about demonstration of transaction functions commit and rollback.
 
+
+IMPORTANT NOTE!
+Run each task one by one, and insert in the tables while creation of them ( f.e you created table teams, first insert the data in teams, then move to creation of table players, in other case it will give an error of foreign key constraint, because you insert into players first then in teams , but players have dependency).
+
 Preparation and solution:
 
 I was using a local pgadmin server on my mac and performed all operations in the PostgreSQL Terminal. 
