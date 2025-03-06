@@ -1,3 +1,14 @@
+DROP TABLE IF EXISTS TEAMS;
+DROP TABLE IF EXISTS PLAYERS;
+DROP TABLE IF EXISTS position;
+DROP TABLE IF EXISTS fragrances;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS enrollments;
+DROP VIEW IF EXISTS major_of_students;
+DROP MATERIALIZED VIEW IF EXISTS average_gpa;
+DROP TABLE IF EXISTS fragrance_store;
+
+
 -- 1.Primary key and Foreign Key usage
 
 CREATE TABLE TEAMS(
@@ -34,7 +45,7 @@ ALTER TABLE players ADD CONSTRAINT fk_players_position
 FOREIGN KEY (positionID)
 REFERENCES position(id)
 ON DELETE CASCADE; 
-(if position deleted , it will also delete all players in that position)
+-- if position deleted , it will also delete all players in that position
 
 
 insert into players (fullname, team_id, positionid) values ('Erling Haaland',5,4);
@@ -66,7 +77,7 @@ insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier'
 
 -- 4.Demonstrating of Joins
 
-First create the table
+-- First create the table
 
 CREATE TABLE students(
 student_id SERIAL PRIMARY KEY,
