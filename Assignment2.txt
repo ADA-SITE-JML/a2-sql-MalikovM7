@@ -1,13 +1,14 @@
-DROP TABLE IF EXISTS TEAMS;
-DROP TABLE IF EXISTS PLAYERS;
-DROP TABLE IF EXISTS position;
-DROP TABLE IF EXISTS fragrances;
-DROP TABLE IF EXISTS enrollments;
-DROP TABLE IF EXISTS students;
-DROP VIEW IF EXISTS major_of_students;
+DROP TABLE IF EXISTS Orders CASCADE;
+DROP TABLE IF EXISTS Customers CASCADE;
+DROP TABLE IF EXISTS fragrance_store CASCADE;
 DROP MATERIALIZED VIEW IF EXISTS average_gpa;
-DROP TABLE IF EXISTS fragrance_store;
-
+DROP VIEW IF EXISTS major_of_students;
+DROP TABLE IF EXISTS enrollments CASCADE;
+DROP TABLE IF EXISTS students CASCADE;
+DROP TABLE IF EXISTS fragrances CASCADE;
+DROP TABLE IF EXISTS players CASCADE;
+DROP TABLE IF EXISTS position CASCADE;
+DROP TABLE IF EXISTS teams CASCADE;
 
 -- 1.Primary key and Foreign Key usage
 
@@ -25,6 +26,7 @@ FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE);
 -- Demonstration of FK
 
 INSERT INTO teams (name) VALUES ('Manchester United'), ('Tottenham'), ('Liverpool');
+INSERT INTO teams (name) VALUES ('Manchester City');  -- Adding a new team
 INSERT INTO players (fullname, team_id) VALUES ('Amad Diallo', 1), ('James Maddison', 2), ('Mohammed Salah', 3);
 DELETE FROM teams where id=3; 
 -- It will delete Liverpool and because of fk it will delete Mohammed Salah from players table.
@@ -47,10 +49,13 @@ REFERENCES position(id)
 ON DELETE CASCADE; 
 -- if position deleted , it will also delete all players in that position
 
+INSERT INTO teams (name) VALUES ('Manchester City');  -- Adding a new team
 
 insert into players (fullname, team_id, positionid) values ('Erling Haaland',5,4);
-insert into players (fullname, team_id, positionid) values ('Alexander Arnold',4,2);
 
+INSERT INTO teams (name) VALUES ('Liverpool');  
+
+insert into players (fullname, team_id, positionid) values ('Alexander Arnold',4,2);
 
 
 -- 3.Check, NOT NULL, UNIQUE
@@ -67,10 +72,10 @@ PRIMARY KEY(id));
 
 -- To check the constraints we can insert something into the table.
 
-insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',100,30);
+-- insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',100,30);
 
-insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',100,120);
-insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',-10,0);
+-- insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',100,120);
+-- insert into fragrances(name,price,discounted_price) values ('Jean Paul Gaultier',-10,0);
 
 
 
@@ -225,7 +230,7 @@ ALTER TABLE Orders ADD PRIMARY KEY (OrderID);
 
 ALTER TABLE Orders ADD FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID);
 
-
+select * from Orders;
 
 -- 7.Commit and RollBack demonstration
 
@@ -243,3 +248,4 @@ DELETE from Orders where CustomerID=4;
 COMMIT;
 
 ROLLBACK;
+END;
