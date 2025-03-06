@@ -9,8 +9,6 @@ Mar3: Used student table and added the columns to create a view and materialized
 Mar4: First, I have built the unnormalized table Fragrance store, then by using insert as select and create as select split it into two tables. Moreover, I completed the last task which was about demonstration of transaction functions commit and rollback.
 Mar6: added drop tables in the beginning
 
-IMPORTANT NOTE!
-Run each task one by one, and insert in the tables while creation of them ( f.e you created table teams, first insert the data in teams, then move to creation of table players, in other case it will give an error of foreign key constraint, because you insert into players first then in teams , but players have dependency).
 
 Preparation and solution:
 
