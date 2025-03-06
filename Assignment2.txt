@@ -1,14 +1,15 @@
-DROP TABLE IF EXISTS Orders CASCADE;
-DROP TABLE IF EXISTS Customers CASCADE;
-DROP TABLE IF EXISTS fragrance_store CASCADE;
-DROP MATERIALIZED VIEW IF EXISTS average_gpa;
-DROP VIEW IF EXISTS major_of_students;
-DROP TABLE IF EXISTS enrollments CASCADE;
-DROP TABLE IF EXISTS students CASCADE;
-DROP TABLE IF EXISTS fragrances CASCADE;
-DROP TABLE IF EXISTS players CASCADE;
-DROP TABLE IF EXISTS position CASCADE;
-DROP TABLE IF EXISTS teams CASCADE;
+--Uncomment after first execution to drop the tables and run again the code without dropping
+--DROP TABLE IF EXISTS Orders CASCADE;
+--DROP TABLE IF EXISTS Customers CASCADE;
+--DROP TABLE IF EXISTS fragrance_store CASCADE;
+--DROP MATERIALIZED VIEW IF EXISTS average_gpa;
+--DROP VIEW IF EXISTS major_of_students;
+--DROP TABLE IF EXISTS enrollments CASCADE;
+--DROP TABLE IF EXISTS students CASCADE;
+--DROP TABLE IF EXISTS fragrances CASCADE;
+--DROP TABLE IF EXISTS players CASCADE;
+--DROP TABLE IF EXISTS position CASCADE;
+--DROP TABLE IF EXISTS teams CASCADE;
 
 -- 1.Primary key and Foreign Key usage
 
@@ -230,22 +231,29 @@ ALTER TABLE Orders ADD PRIMARY KEY (OrderID);
 
 ALTER TABLE Orders ADD FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID);
 
-select * from Orders;
+
 
 -- 7.Commit and RollBack demonstration
 
-Begin;
+--Uncomment it to check
 
-DELETE from Orders where CustomerID=4;
+--Begin;
 
-ROLLBACK; 
+--DELETE from Orders where CustomerID=4;
+
+--ROLLBACK; 
+
+--select * from Orders;
 
 
-Begin;
+--Begin;
 
-DELETE from Orders where CustomerID=4;
+--DELETE from Orders where CustomerID=4;
 
-COMMIT;
+--COMMIT;
 
-ROLLBACK;
-END;
+--ROLLBACK;
+
+--select * from Orders;
+
+--END;
